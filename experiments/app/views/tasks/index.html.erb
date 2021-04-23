@@ -1,0 +1,88 @@
+
+
+<!-- Viewとは、ユーザ（ブラウザ）に返却する画面を作成する機能のことです。
+Controllerから連携されたパラメータを設定することで動的なページが作成できます。
+<% @tasks.each do |task| %> ... <% end %>の箇所で、
+Controllerから受け取ったToDoのタスク一覧を表示しています。
+
+<h1>タスク一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>タスク名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+-->
+<!-- トップ画面（/tasks）にタスク追加画面へのリンクを追加 
+
+<h1>タスク一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>タスク名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to '追加', new_task_path %> --> 
+
+<!-- あとは、トップ画面（/tasks）にタスク編集画面へのリンクを追加してやればOKです  
+<h1>タスク一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>タスク名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= link_to '編集', edit_task_path(task) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to '追加', new_task_path %>  -->
+
+
+<h1>タスク一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>タスク名</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= link_to '編集', edit_task_path(task) %></td>
+        <td><%= link_to '削除', task_path(task), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to '追加', new_task_path %>
+<!--
+destroyアクションはhttpのDELETEメソッドを使用するため、
+method: :deleteでDELETEメソッドを指定しています。
+ちなみに、メソッドを指定しない場合、GETメソッドが使用されます。
+-->
